@@ -98,6 +98,13 @@ local function AddPriestTriggers()
 end
 
 local function AddDruidTriggers()
+    -- Keep buffs up
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Gift of the Wild", {"Gift of the Wild", "Mark of the Wild"})
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Mark of the Wild", {"Gift of the Wild", "Mark of the Wild"})
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Thorns", {"Thorns", "Brambles"})
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Brambles", {"Thorns", "Brambles"})
+
+    -- Cure Debuffs
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, PlayerAuraTypes, "Remove Corruption", "Curse")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, TargetAuraTypes, "Remove Corruption", "Curse")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, PlayerAuraTypes, "Remove Corruption", "Poison")
@@ -113,6 +120,11 @@ end
 local function AddWarlockTriggers()
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, TargetAuraTypes, "Devour Magic", "Magic")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, TargetAuraTypes, "Singe Magic", "Magic")
+end
+
+local function AddWarriorTriggers()
+    -- Keep buffs up
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Battle Shout", {"Battle Shout"})
 end
 
 local function AddDwarfTriggers()
