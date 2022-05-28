@@ -72,12 +72,40 @@ local function AddShamanTriggers()
 end
 
 local function AddMageTriggers()
+    -- Keep buffs up
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Arcane Brilliance", {"Arcane Brilliance", "Arcane Intellect"})
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Arcane Intellect", {"Arcane Brilliance", "Arcane Intellect"})
+
+    -- Cure debuffs
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, PlayerAuraTypes, "Remove Curse", "Curse")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, TargetAuraTypes, "Remove Curse", "Curse")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, TargetAuraTypes, "Spellsteal", "Magic")
 end
 
 local function AddPaladinTriggers()
+    -- Keep buffs up
+    local PaladinBuffs = {
+        "Blessing of Salvation", "Blessing of Protection", "Blessing of Freedom", "Blessing of Sacrifice", "Blessing of Wisdom",
+        "Blessing of Might", "Blessing of Light", "Greater Blessing of Kings", "Greater Blessing of Wisdom",
+        "Greater Blessing of Might", "Greater Blessing of Sanctuary", "Greater Blessing of Salvation",
+        "Greater Blessing of Light",
+    }
+
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Salvation", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Protection", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Freedom", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Sacrifice", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Wisdom", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Might", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Blessing of Light", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Greater Blessing of Kings", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Greater Blessing of Wisdom", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Greater Blessing of Might", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Greater Blessing of Sanctuary", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Greater Blessing of Salvation", PaladinBuffs)
+    SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, "Greater Blessing of Light", PaladinBuffs)
+
+    -- Cure debuffs
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, PlayerAuraTypes, "Cleanse", "Disease")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, TargetAuraTypes, "Cleanse", "Disease")
     SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, PlayerAuraTypes, "Cleanse", "Magic")
