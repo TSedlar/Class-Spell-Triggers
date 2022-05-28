@@ -1,0 +1,12 @@
+## Version: 1.0
+
+## Title: Class Spell Triggers
+## Notes: Shows action bar visual cues based on class triggers
+
+## Author: Tyler Sedlar
+
+ClassSpellTriggers.lua
+util/ArrayUtil.lua
+util/AuraUtil.lua
+util/FrameUtil.lua
+util/SpellWidgetUtil.lua
