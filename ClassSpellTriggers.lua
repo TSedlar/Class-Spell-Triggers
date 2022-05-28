@@ -76,6 +76,23 @@ local function AddShamanTriggers()
 end
 
 local function AddMageTriggers()
+    -- Show shock spells when shamanistic focus is up
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Arcane Blast", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Arcane Explosion", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Arcane Missiles", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Blast Wave", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Blizzard", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Cone of Cold", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Dragon's Breath", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Fire Blast", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Fireball", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Flamestrike", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Frost Nova", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Frostbolt", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Ice Lance", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Pyroblast", "Clearcasting")
+    SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, PlayerAuras, "Scorch", "Clearcasting")
+
     -- Keep buffs up
     AddBidirectionalWidgetInactiveGlow("Arcane Brilliance", {"Arcane Brilliance", "Arcane Intellect"})
     AddBidirectionalWidgetInactiveGlow("Arcane Intellect", {"Arcane Brilliance", "Arcane Intellect"})
