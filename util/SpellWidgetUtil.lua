@@ -1,5 +1,40 @@
 SpellWidgetUtil = {}
 
+function SpellWidgetUtil:Reset(SpellWidgets)
+    if SpellWidgets ~= nil then
+        for _,SpellWidgetName in pairs(SpellWidgets) do
+            local SpellWidget = _G[SpellWidgetName]
+            if SpellWidget ~= nil then
+                ActionButton_HideOverlayGlow(SpellWidget)
+
+                if SpellWidget.tex ~= nil then
+                    SpellWidget.tex:SetColorTexture(0, 0, 0, 0.0)
+                end
+
+                if SpellWidget.stacks ~= nil then
+                    SpellWidget.stacks:SetText("")
+                end
+
+                if SpellWidget.stacksOutline1 ~= nil then
+                    SpellWidget.stacksOutline1:SetText("")
+                end
+
+                if SpellWidget.stacksOutline2 ~= nil then
+                    SpellWidget.stacksOutline2:SetText("")
+                end
+
+                if SpellWidget.stacksOutline3 ~= nil then
+                    SpellWidget.stacksOutline3:SetText("")
+                end
+
+                if SpellWidget.stacksOutline4 ~= nil then
+                    SpellWidget.stacksOutline4:SetText("")
+                end
+            end
+        end
+    end
+end
+
 function SpellWidgetUtil:InjectOverlay(SpellWidget)
     -- Inject the masks on each spell widget
     if not SpellWidget.text then

@@ -101,6 +101,16 @@ function SpellAuraUtil:HasTotem(Totems, Totem)
     return ArrayUtil:ContainsString(Totems, Totem)
 end
 
+function SpellAuraUtil:HasMainHandEnchant()
+    local hasMainHandEnchant, _, _, _, hasOffHandEnchant, _, _, _ = GetWeaponEnchantInfo()
+    return hasMainHandEnchant
+end
+
+function SpellAuraUtil:HasOffHandEnchant()
+    local hasMainHandEnchant, _, _, _, hasOffHandEnchant, _, _, _ = GetWeaponEnchantInfo()
+    return hasOffHandEnchant
+end
+
 function SpellAuraUtil:HandleWidgetStackCount(SpellWidgets, AuraStackCounts, SpellName, AuraName)
     local WidgetName = SpellWidgets[SpellName]
     if WidgetName ~= nil then
@@ -128,7 +138,7 @@ function SpellAuraUtil:HandleWidgetStackCount(SpellWidgets, AuraStackCounts, Spe
     end
 end
 
-function SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, Auras, SpellName, AuraName)
+function SpellAuraUtil:HandleActiveGlow(SpellWidgets, Auras, SpellName, AuraName)
     local WidgetName = SpellWidgets[SpellName]
     if WidgetName ~= nil then
         local SpellWidget = _G[WidgetName]
@@ -146,7 +156,7 @@ function SpellAuraUtil:HandleWidgetActiveGlow(SpellWidgets, Auras, SpellName, Au
     end
 end
 
-function SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, SpellName, AuraNames)
+function SpellAuraUtil:HandleInactiveGlow(SpellWidgets, Auras, SpellName, AuraNames)
     local WidgetName = SpellWidgets[SpellName]
     if WidgetName ~= nil then
         local SpellWidget = _G[WidgetName]
@@ -163,6 +173,42 @@ function SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, SpellName, 
             end
 
             if not HasAnyAura then
+                ActionButton_ShowOverlayGlow(SpellWidget)
+            else
+                ActionButton_HideOverlayGlow(SpellWidget)
+            end
+        end
+    end
+end
+
+function SpellAuraUtil:HandleInactiveMainHandEnchantGlow(SpellWidgets, SpellName)
+    local WidgetName = SpellWidgets[SpellName]
+    if WidgetName ~= nil then
+        local SpellWidget = _G[WidgetName]
+        if SpellWidget ~= nil then
+            if SpellWidget.tex == nil then
+                SpellWidgetUtil.InjectOverlay(SpellWidget)
+            end
+
+            if not SpellAuraUtil:HasMainHandEnchant() then
+                ActionButton_ShowOverlayGlow(SpellWidget)
+            else
+                ActionButton_HideOverlayGlow(SpellWidget)
+            end
+        end
+    end
+end
+
+function SpellAuraUtil:HandleInactiveOffHandEnchantGlow(SpellWidgets, SpellName)
+    local WidgetName = SpellWidgets[SpellName]
+    if WidgetName ~= nil then
+        local SpellWidget = _G[WidgetName]
+        if SpellWidget ~= nil then
+            if SpellWidget.tex == nil then
+                SpellWidgetUtil.InjectOverlay(SpellWidget)
+            end
+
+            if not SpellAuraUtil:HasOffHandEnchant() then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)
@@ -207,7 +253,7 @@ function SpellAuraUtil:HandleDebuffGlowExplicit(SpellWidgets, Auras, AuraTypes, 
     end
 end
 
-function SpellAuraUtil:HandleWidgetOverlay(SpellWidgets, Auras, Totems, SpellName, AuraName)
+function SpellAuraUtil:HandleOverlay(SpellWidgets, Auras, Totems, SpellName, AuraName)
     local WidgetName = SpellWidgets[SpellName]
     if WidgetName ~= nil then
         local SpellWidget = _G[WidgetName]
