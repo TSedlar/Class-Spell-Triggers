@@ -18,7 +18,7 @@ This addon also shows spell stack counts directly on the action bar.
 ## Examples
 - When you or your target are poisoned/cursed/magic debuffed/diseased and have the applicable spell to cure the negative effect
 - When you have buffs that should be up permanently and need to be renewed (lightning shield/water shield/battleshout/etc)
-- When a spell is already used and would have no effect (totem already out, target not poisoned)
+- When a spell is already used and would have no effect (totem already out)
 
 
 ## Compatibility
