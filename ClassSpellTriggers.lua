@@ -272,6 +272,7 @@ end
 local AuraWatcher = CreateFrame("Frame")
 AuraWatcher:RegisterUnitEvent("UNIT_AURA", "player") -- Update auras when buffs are changed
 AuraWatcher:RegisterEvent("PLAYER_TOTEM_UPDATE") -- Update auras when a totem is used
+AuraWatcher:RegisterEvent("UNIT_INVENTORY_CHANGED") -- Update auras when weapon enchants are changed
 
 AuraWatcher:HookScript("OnEvent", function()
     LastAuraChangeTime = time() -- track aura timestamps
