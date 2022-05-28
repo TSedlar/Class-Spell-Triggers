@@ -171,7 +171,7 @@ function SpellAuraUtil:HandleWidgetInactiveGlow(SpellWidgets, Auras, SpellName, 
     end
 end
 
-function SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, AuraTypes, SpellName, AuraName)
+function SpellAuraUtil:HandleDebuffGlow(SpellWidgets, Auras, AuraTypes, SpellName, AuraName)
     local WidgetName = SpellWidgets[SpellName]
     if WidgetName ~= nil then
         local SpellWidget = _G[WidgetName]
@@ -181,6 +181,24 @@ function SpellAuraUtil:HandleWidgetDebuffGlow(SpellWidgets, Auras, AuraTypes, Sp
             end
 
             if SpellAuraUtil:HasAuraType(AuraTypes, AuraName) then
+                ActionButton_ShowOverlayGlow(SpellWidget)
+            else
+                ActionButton_HideOverlayGlow(SpellWidget)
+            end
+        end
+    end
+end
+
+function SpellAuraUtil:HandleDebuffGlowExplicit(SpellWidgets, Auras, AuraTypes, SpellName, AuraType, AuraName)
+    local WidgetName = SpellWidgets[SpellName]
+    if WidgetName ~= nil then
+        local SpellWidget = _G[WidgetName]
+        if SpellWidget ~= nil then
+            if SpellWidget.tex == nil then
+                SpellWidgetUtil.InjectOverlay(SpellWidget)
+            end
+
+            if SpellAuraUtil:HasAuraType(AuraTypes, AuraType) and SpellAuraUtil:HasAura(AuraName) then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)
