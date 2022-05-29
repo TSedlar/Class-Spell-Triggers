@@ -266,6 +266,7 @@ local function UpdateAuraDecorations()
     AddDruidTriggers()
     AddHunterTriggers()
     AddWarlockTriggers()
+    AddWarriorTriggers()
     AddDwarfTriggers()
 end
 
