@@ -48,32 +48,42 @@ local function AddSharedTriggers()
     SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Greater Heal", "Clearcasting")
     SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Flash of Light", "Clearcasting")
 
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Regrowth", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Deft Touch", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Bash", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Claw", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Demoralizing Roar", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Entangling Roots", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Feral Charge", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Ferocious Bite", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Healing Touch", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Hurricane", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Insect Swarm", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Maul", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Moonfire", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Nature's Grasp", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Pounce", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Rake", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Ravage", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Rejuvenation", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Rip", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Shred", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Starfire", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Swiftmend", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Swipe", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Thorns", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Tranquility", "Clearcasting")
-    SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Wrath", "Clearcasting")
+    -- Literally everything for druids can be clearcasted, combat texts make it obvious enough
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Regrowth", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Deft Touch", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Bash", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Claw", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Demoralizing Roar", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Entangling Roots", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Feral Charge", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Ferocious Bite", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Healing Touch", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Hurricane", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Insect Swarm", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Maul", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Moonfire", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Nature's Grasp", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Pounce", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Rake", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Ravage", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Rejuvenation", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Rip", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Shred", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Starfire", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Swiftmend", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Swipe", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Thorns", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Tranquility", "Clearcasting")
+    -- SpellAuraUtil:HandleActiveGlow(SpellWidgets, PlayerAuras, "Wrath", "Clearcasting")
+end
+
+local function AddDeathKnightTriggers()
+    -- Keep a presence buff up
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Blood Presence", {"Blood Presence", "Frost Presence"})
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Frost Presence", {"Blood Presence", "Frost Presence"})
+
+    -- Prioritize Blood Boil when target has Blood Plague
+    SpellAuraUtil:HandleActiveGlow(SpellWidgets, TargetAuras, "Blood Boil", "Blood Plague")
 end
 
 local function AddShamanTriggers()
@@ -136,8 +146,12 @@ end
 
 local function AddMageTriggers()
     -- Keep buffs up
-    AddBidirectionalWidgetInactiveGlow("Arcane Brilliance", {"Arcane Brilliance", "Arcane Intellect"})
-    AddBidirectionalWidgetInactiveGlow("Arcane Intellect", {"Arcane Brilliance", "Arcane Intellect"})
+    -- AddBidirectionalWidgetInactiveGlow("Arcane Brilliance", {"Arcane Brilliance", "Arcane Intellect"})
+    -- AddBidirectionalWidgetInactiveGlow("Arcane Intellect", {"Arcane Brilliance", "Arcane Intellect"})
+
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Arcane Intellect", {"Arcane Brilliance", "Arcane Intellect"})
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Arcane Brilliance", {"Arcane Brilliance", "Arcane Intellect"})
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Frost Armor", {"Frost Armor"})
 
     -- Cure debuffs
     SpellAuraUtil:HandleDebuffGlow(SpellWidgets, TargetAuras, TargetAuraTypes, "Spellsteal", "Magic")
@@ -194,6 +208,7 @@ local function AddPriestTriggers()
     SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Prayer of Fortitude", {"Prayer of Fortitude", "Power Word: Fortitude"})
     SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Power Word: Fortitude", {"Prayer of Fortitude", "Power Word: Fortitude"})
     SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Prayer of Spirit", {"Prayer of Spirit"})
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Inner Fire", {"Inner Fire"})
 
     -- Cure debuffs
     SpellAuraUtil:HandleDebuffGlow(SpellWidgets, PlayerAuras, PlayerAuraTypes, "Purify", "Disease")
@@ -218,6 +233,7 @@ local function AddDruidTriggers()
     SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Mark of the Wild", {"Gift of the Wild", "Mark of the Wild"})
     SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Thorns", {"Thorns", "Brambles"})
     SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Brambles", {"Thorns", "Brambles"})
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, PlayerAuras, "Omen of Clarity", {"Omen of Clarity"})
 
     -- Cure Debuffs
     SpellAuraUtil:HandleDebuffGlow(SpellWidgets, PlayerAuras, PlayerAuraTypes, "Remove Corruption", "Curse")
@@ -259,6 +275,7 @@ local function UpdateAuraDecorations()
     Totems = SpellAuraUtil:GetTotems()
 
     AddSharedTriggers()
+    AddDeathKnightTriggers()
     AddShamanTriggers()
     AddMageTriggers()
     AddPaladinTriggers()
@@ -272,8 +289,11 @@ end
 
 local AuraWatcher = CreateFrame("Frame")
 AuraWatcher:RegisterUnitEvent("UNIT_AURA", "player") -- Update auras when buffs are changed
+AuraWatcher:RegisterUnitEvent("UNIT_AURA", "target") -- Update auras when buffs are changed
 AuraWatcher:RegisterEvent("PLAYER_TOTEM_UPDATE") -- Update auras when a totem is used
 AuraWatcher:RegisterEvent("UNIT_INVENTORY_CHANGED") -- Update auras when weapon enchants are changed
+AuraWatcher:RegisterEvent("PLAYER_TARGET_CHANGED") -- Update auras when target changes
+AuraWatcher:RegisterEvent("SPELL_UPDATE_COOLDOWN") -- Update auras when cooldowns change
 
 AuraWatcher:HookScript("OnEvent", function()
     LastAuraChangeTime = time() -- track aura timestamps
@@ -281,15 +301,17 @@ AuraWatcher:HookScript("OnEvent", function()
 end)
 
 local ActionBarWatcher = CreateFrame("Frame")
-ActionBarWatcher:RegisterEvent("ACTIONBAR_SLOT_CHANGED") -- Update when spells are rearranged")
+-- ActionBarWatcher:RegisterEvent("ACTIONBAR_SLOT_CHANGED") -- Update when spells are rearranged")
 
 ActionBarWatcher:HookScript("OnEvent", function()
+    print("ClassSpellTriggers: Regenerating spell cache (ActionBarSlotChanged)")
     SpellWidgetUtil:Reset(SpellWidgets)
     SpellWidgets = SpellWidgetUtil:GenerateSpellWidgets() -- Regenerate spell mapping when action bar is changed
     UpdateAuraDecorations()
 end)
 
 GameLoadFrame:HookScript("OnEvent", function()
+    print("ClassSpellTriggers: Regenerating spell cache (GameLoad)")
     SpellWidgets = SpellWidgetUtil:GenerateSpellWidgets() -- Generate spell mapping when game loads
     UpdateAuraDecorations()
 end)

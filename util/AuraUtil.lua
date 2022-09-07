@@ -20,18 +20,36 @@ end
 
 function SpellAuraUtil:GetAuras(Unit)
     local Auras = {}
-    local Aura = true
-    local AuraIndex = 1
-    while Aura ~= nil do
-        if not Aura then
-            break
+
+    if UnitExists(Unit) then
+        local Aura = true
+        local AuraIndex = 1
+        -- Get Helpful Auras
+        while Aura ~= nil do
+            if not Aura then
+                break
+            end
+            Aura = UnitAura(Unit, AuraIndex, 'HELPFUL')
+            if Aura ~= nil then
+                table.insert(Auras, Aura)
+            end
+            AuraIndex = AuraIndex + 1
         end
-        Aura = UnitAura(Unit, AuraIndex)
-        if Aura ~= nil then
-            table.insert(Auras, Aura)
+        -- Get Harmful Auras
+        Aura = true
+        AuraIndex = 1
+        while Aura ~= nil do
+            if not Aura then
+                break
+            end
+            Aura = UnitAura(Unit, AuraIndex, 'HARMFUL')
+            if Aura ~= nil then
+                table.insert(Auras, Aura)
+            end
+            AuraIndex = AuraIndex + 1
         end
-        AuraIndex = AuraIndex + 1
     end
+
     return Auras
 end
 
@@ -41,19 +59,38 @@ end
 
 function SpellAuraUtil:GetAuraStacks(Unit)
     local AuraStacks = {}
-    local CurrentAura = true
-    local AuraIndex = 1
-    while CurrentAura ~= nil do
-        local Aura, _, StackCount = UnitAura(Unit, AuraIndex)
-        if not Aura then
-            break
+
+    if UnitExists(Unit) then
+        local CurrentAura = true
+        local AuraIndex = 1
+        -- Get Helpful Aura Stacks
+        while CurrentAura ~= nil do
+            local Aura, _, StackCount = UnitAura(Unit, AuraIndex, 'HELPFUL')
+            if not Aura then
+                break
+            end
+            if StackCount ~= nil and StackCount > 0 then
+                AuraStacks[Aura] = StackCount
+            end
+            AuraIndex = AuraIndex + 1
+            CurrentAura = Aura
         end
-        if StackCount ~= nil and StackCount > 0 then
-            AuraStacks[Aura] = StackCount
+        -- Get Harmful Aura Stacks
+        CurrentAura = true
+        AuraIndex = 1
+        while CurrentAura ~= nil do
+            local Aura, _, StackCount = UnitAura(Unit, AuraIndex, 'HARMFUL')
+            if not Aura then
+                break
+            end
+            if StackCount ~= nil and StackCount > 0 then
+                AuraStacks[Aura] = StackCount
+            end
+            AuraIndex = AuraIndex + 1
+            CurrentAura = Aura
         end
-        AuraIndex = AuraIndex + 1
-        CurrentAura = Aura
     end
+
     return AuraStacks
 end
 
@@ -67,20 +104,40 @@ end
 
 function SpellAuraUtil:GetAuraTypes(Unit)
     local AuraTypes = {}
-    local AuraIndex = 1
-    local CurrentAuraType = true
 
-    while CurrentAuraType ~= nil do
-        if not CurrentAuraType then
-            break
+    if UnitExists(Unit) then
+        local AuraIndex = 1
+        local CurrentAuraType = true
+
+        -- Get Helpful Aura Types
+        while CurrentAuraType ~= nil do
+            if not CurrentAuraType then
+                break
+            end
+            local _, _, _, AuraType = UnitAura(Unit, AuraIndex, 'HELPFUL')
+            if AuraType ~= nil and not ArrayUtil:Has(AuraTypes, AuraType) then
+                table.insert(AuraTypes, AuraType)
+            end
+            AuraIndex = AuraIndex + 1
+            CurrentAuraType = AuraType
         end
-        local _, _, _, AuraType = UnitAura(Unit, AuraIndex)
-        if AuraType ~= nil and not ArrayUtil:Has(AuraTypes, AuraType) then
-            table.insert(AuraTypes, AuraType)
+
+        -- Get Harmful Aura Types
+        AuraIndex = 1
+        CurrentAuraType = true
+        while CurrentAuraType ~= nil do
+            if not CurrentAuraType then
+                break
+            end
+            local _, _, _, AuraType = UnitAura(Unit, AuraIndex, 'HARMFUL')
+            if AuraType ~= nil and not ArrayUtil:Has(AuraTypes, AuraType) then
+                table.insert(AuraTypes, AuraType)
+            end
+            AuraIndex = AuraIndex + 1
+            CurrentAuraType = AuraType
         end
-        AuraIndex = AuraIndex + 1
-        CurrentAuraType = AuraType
     end
+
     return AuraTypes
 end
 
@@ -109,6 +166,12 @@ end
 function SpellAuraUtil:HasOffHandEnchant()
     local hasMainHandEnchant, _, _, _, hasOffHandEnchant, _, _, _ = GetWeaponEnchantInfo()
     return hasOffHandEnchant
+end
+
+function SpellAuraUtil:CanCast(SpellName)
+    local _, Cooldown, _, _ = GetSpellCooldown(SpellName)
+
+    return Cooldown <= 1.5 -- seconds (GCD = 1.5 seconds)
 end
 
 function SpellAuraUtil:HandleWidgetStackCount(SpellWidgets, AuraStackCounts, SpellName, AuraName)
@@ -147,7 +210,7 @@ function SpellAuraUtil:HandleActiveGlow(SpellWidgets, Auras, SpellName, AuraName
                 SpellWidgetUtil.InjectOverlay(SpellWidget)
             end
 
-            if SpellAuraUtil:HasAura(Auras, AuraName) then
+            if SpellAuraUtil:HasAura(Auras, AuraName) and SpellAuraUtil:CanCast(SpellName) then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)
@@ -172,7 +235,7 @@ function SpellAuraUtil:HandleInactiveGlow(SpellWidgets, Auras, SpellName, AuraNa
                 end
             end
 
-            if not HasAnyAura then
+            if not HasAnyAura and SpellAuraUtil:CanCast(SpellName) then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)
@@ -226,7 +289,7 @@ function SpellAuraUtil:HandleDebuffGlow(SpellWidgets, Auras, AuraTypes, SpellNam
                 SpellWidgetUtil.InjectOverlay(SpellWidget)
             end
 
-            if SpellAuraUtil:HasAuraType(AuraTypes, AuraName) then
+            if SpellAuraUtil:HasAuraType(AuraTypes, AuraName) and SpellAuraUtil:CanCast(SpellName) then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)
@@ -244,7 +307,7 @@ function SpellAuraUtil:HandleDebuffGlowExplicit(SpellWidgets, Auras, AuraTypes, 
                 SpellWidgetUtil.InjectOverlay(SpellWidget)
             end
 
-            if SpellAuraUtil:HasAuraType(AuraTypes, AuraType) and SpellAuraUtil:HasAura(AuraName) then
+            if SpellAuraUtil:HasAuraType(AuraTypes, AuraType) and SpellAuraUtil:HasAura(AuraName) and SpellAuraUtil:CanCast(SpellName) then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)
