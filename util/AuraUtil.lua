@@ -219,7 +219,7 @@ function SpellAuraUtil:HandleActiveGlow(SpellWidgets, Auras, SpellName, AuraName
     end
 end
 
-function SpellAuraUtil:HandleInactiveGlow(SpellWidgets, Auras, SpellName, AuraNames)
+function SpellAuraUtil:HandleInactiveGlow(SpellWidgets, Auras, SpellName, AuraNames, CheckExistsUnit)
     local WidgetName = SpellWidgets[SpellName]
     if WidgetName ~= nil then
         local SpellWidget = _G[WidgetName]
@@ -235,7 +235,7 @@ function SpellAuraUtil:HandleInactiveGlow(SpellWidgets, Auras, SpellName, AuraNa
                 end
             end
 
-            if not HasAnyAura and SpellAuraUtil:CanCast(SpellName) then
+            if not HasAnyAura and SpellAuraUtil:CanCast(SpellName) and (not CheckExistsUnit or (UnitExists(CheckExistsUnit) and not UnitIsDead(CheckExistsUnit))) then
                 ActionButton_ShowOverlayGlow(SpellWidget)
             else
                 ActionButton_HideOverlayGlow(SpellWidget)

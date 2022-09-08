@@ -84,6 +84,8 @@ local function AddDeathKnightTriggers()
 
     -- Prioritize Blood Boil when target has Blood Plague
     SpellAuraUtil:HandleActiveGlow(SpellWidgets, TargetAuras, "Blood Boil", "Blood Plague")
+    -- Prioritize Plague Strike when target does not have Blood Plague
+    SpellAuraUtil:HandleInactiveGlow(SpellWidgets, TargetAuras, "Plague Strike", {"Blood Plague"}, "target")
 end
 
 local function AddShamanTriggers()
